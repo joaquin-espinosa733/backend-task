@@ -2,11 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import routes from "./src/routes/index.js";
+import cors from "cors";
 
 import connectDB from "./src/db/db.js";
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
