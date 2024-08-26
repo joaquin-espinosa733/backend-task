@@ -2,7 +2,8 @@ import {
   allTask,
   createTask,
   deleteTask,
-  editTask
+  editTask,
+  findByTaskOne,
 } from "../controllers/taskControllers.js";
 
 export const allTaskHandler = async (req, res) => {
@@ -34,7 +35,7 @@ export const deleteTaskHandler = async (req, res) => {
   const { id } = req.params;
   try {
     const deleteTaskResponse = await deleteTask(id);
-    res.status(200).send("Tarea eliminada");
+    res.status(200).send("Tarea eliminada", deleteTaskResponse);
   } catch (error) {
     res.status(500).json({
       message: "Error al eliminar la terea",
@@ -53,6 +54,22 @@ export const editTaskHandler = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Error al editar la tarea",
+      error: error.message,
+    });
+  }
+};
+
+export const findTaskHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const findTask = await findByTaskOne(id);
+    if (!findTask) {
+      res.status(404).send("no existe esta tarea");
+    }
+    res.status(200).json(findTask);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error no encontro la tarea",
       error: error.message,
     });
   }

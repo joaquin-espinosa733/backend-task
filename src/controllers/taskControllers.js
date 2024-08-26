@@ -28,3 +28,8 @@ export const editTask = async (id, updatedData) => {
     throw new Error(error.message);
   }
 };
+
+export const findByTaskOne = async (id) => {
+  const findTaks = await Task.findById(id);
+  return findTaks;
+};
