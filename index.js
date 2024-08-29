@@ -19,6 +19,9 @@ app.use(morgan("dev"));
 
 connectDB();
 
+// Servir archivos estáticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use("/api", routes);
 
 // Sirviendo el archivo HTML
